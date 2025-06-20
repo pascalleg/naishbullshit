@@ -1,0 +1,40 @@
+import { Suspense } from 'react'
+import { Metadata } from 'next'
+import { ContractTemplates } from '@/components/contracts/contract-templates'
+import { Skeleton } from '@/components/loading-skeleton'
+
+export const metadata: Metadata = {
+  title: 'Contract Templates | ETHER',
+  description: 'Manage your contract templates'
+}
+
+export default function ContractTemplatesPage() {
+  return (
+    <div className="container mx-auto py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold">Contract Templates</h1>
+        <p className="text-muted-foreground">
+          Create and manage your contract templates
+        </p>
+      </div>
+
+      <Suspense
+        fallback={
+          <div className="space-y-4">
+            <div className="h-8 w-48 animate-pulse rounded bg-muted" />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-48 animate-pulse rounded-lg bg-muted"
+                />
+              ))}
+            </div>
+          </div>
+        }
+      >
+        <ContractTemplates />
+      </Suspense>
+    </div>
+  )
+} 
